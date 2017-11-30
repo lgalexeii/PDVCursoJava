@@ -25,6 +25,10 @@ public class Articulo {
         this.descuento = descuento;
     }
 
+    public Articulo(String sku) {
+       this.sku = sku;
+    }
+
     public String getSku() {
         return sku;
     }

@@ -9,11 +9,15 @@ package mx.com.elektra.sistemas.itemmgmt;
  *
  * @author 171127 Grupo Salinas
  */
-public class ArticuloCarrito extends ArticuloStock{
+public class ArticuloCompra extends ArticuloStock{
     /**
      * Precio total de los articulos; Cantidad de articulos por precio individual
      */
     private float precioTotal;
+    
+    public ArticuloCompra(Articulo articulo ){
+        super(articulo,0);
+    }
 
     public float getPrecioTotal() {
         return precioTotal;
@@ -21,5 +25,6 @@ public class ArticuloCarrito extends ArticuloStock{
 
     public void setPrecioTotal(float precioTotal) {
         this.precioTotal = precioTotal;
-    }    
+    }
+    
 }

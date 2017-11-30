@@ -65,8 +65,8 @@ public class ArticuloStock {
         return this.articulo.equals(other.articulo) ;
     }
 
-    void validarExistencias(int cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean validarExistencias(int cantidad) {
+        return this.cantidad >= cantidad;
     }
     
     

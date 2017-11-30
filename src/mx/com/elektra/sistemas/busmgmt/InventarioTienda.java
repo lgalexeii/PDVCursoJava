@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.com.elektra.sistemas.itemmgmt;
+package mx.com.elektra.sistemas.busmgmt;
 
 import java.util.ArrayList;
 import java.util.List;
+import mx.com.elektra.sistemas.itemmgmt.Articulo;
+import mx.com.elektra.sistemas.itemmgmt.ArticuloStock;
 
 /**
  *

@@ -5,6 +5,7 @@
  */
 package mx.com.elektra.sistemas.itemmgmt;
 
+import mx.com.elektra.sistemas.busmgmt.Tienda;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +14,46 @@ import java.util.List;
  * @author 171127 Grupo Salinas
  */
 public class Carrito {
-    private List<ArticuloCarrito> listaCompras;
+    private List<ArticuloCompra> listaCompras;
     
     public Carrito(){
         listaCompras = new ArrayList<>();
     }
     
-    public void agregarArticulo(Articulo articulo, int cantidad){
+    public void agregarArticulo(String articulo, int cantidad){
         
-        ArticuloCarrito art = Tienda.obtenerArticulo(articulo,cantidad);
+        ArticuloCompra art = Tienda.obtenerArticulo(articulo,cantidad);
         listaCompras.add(art);
-    }    
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Carrito de Compras: " + "\n");
+        sb.append("Cant\tSku\tDescripcion\tPrecio\tDescuento\n");
+        for(ArticuloCompra articulo: listaCompras){
+            sb.append(articulo).
+            append("\n");
+                    
+        }
+        return sb.toString() ;
+    }
+
+    public void removerArticulo(String sku, int cuantos) {
+        int indexOf = listaCompras.indexOf(new ArticuloCompra(new Articulo(sku)));
+        ArticuloCompra remArticulo = listaCompras.get(indexOf);
+        
+        if(cuantos >= remArticulo.getCantidad()){
+            listaCompras.remove(remArticulo);
+        }else{
+            remArticulo.setCantidad(remArticulo.getCantidad() -  cuantos);
+        }
+        Tienda.devolverArticulo(sku,cuantos);
+    }
+
+    public List<ArticuloCompra> getListaCompras() {
+        return listaCompras;
+    }
+    
+    
+    
 }
