@@ -19,9 +19,11 @@ public class Tienda {
     public static InventarioTienda inventario;
     public static int currentIdCompra = 0;
     private List<Compra> compras;
+    private List<Cliente> clientes;
     
     public Tienda(){
         compras = new ArrayList<>();
+        clientes = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -44,8 +46,19 @@ public class Tienda {
         Compra compra = new Compra();
         compra.getTicket().getListaComprados().addAll( carrito.getListaCompras());
         compra.setStatus("Pagado");
+        calcularTotal(compra);
         this.compras.add(compra);
         return compra.getIdCompra();
+    }
+
+    private void calcularTotal(Compra compra){
+        float total = 0.0f;
+        for(ArticuloCompra art: compra.getTicket().getListaComprados()){
+            total += art.getPrecioTotal();
+        }
+        double imp = (total / 1.16) * 0.16;
+        compra.getTicket().setImpuestos(imp);
+        compra.getTicket().setTotal(total);
     }
     
     public Compra buscar(int idCompra){
@@ -62,6 +75,11 @@ public class Tienda {
         if(artEncontrado.validarExistencias(cantidad)){
             artAgregar = new ArticuloCompra(artEncontrado.getArticulo());
             artAgregar.setCantidad(cantidad);
+            artAgregar.setPrecioTotal(
+                    artAgregar.getArticulo().getPrecio() * cantidad
+                    * (1 - artAgregar.getArticulo().getDescuento()   )
+
+            );
             artEncontrado.setCantidad(artEncontrado.getCantidad() - cantidad);
         }else{
             System.err.println("No hay suficientes Items en Inventario");
@@ -85,6 +103,18 @@ public class Tienda {
     
     public static int siguienteIdCompra() {
         return ++Tienda.currentIdCompra;
+    }
+
+    public void imprimirCompras(){
+        if(this.compras == null || this.compras.isEmpty()){
+            System.out.println("No hay compras registras");
+            return;
+        }
+        System.out.println("Lista de compras");
+        System.out.println("Order Id\tStatus\tMonto" );
+        for (Compra compra: compras ){
+            System.out.println(compra.getIdCompra()+"\t" + compra.getStatus() + "\t" + compra.getTicket().getTotal() );
+        }
     }
     
 }

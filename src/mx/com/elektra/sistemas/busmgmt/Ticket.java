@@ -57,9 +57,9 @@ public class Ticket {
             System.out.println(totalArt-descuento+"\t");
         }
         
-        System.out.println("Subtotal\t"+this.total);
+        System.out.println("Subtotal\t"+this.total/1.16);
         System.out.println("     IVA\t"+this.impuestos);
-        System.out.println("   Total\t"+this.total+this.impuestos);
+        System.out.println("   Total\t"+this.total);
     }
     
 }
