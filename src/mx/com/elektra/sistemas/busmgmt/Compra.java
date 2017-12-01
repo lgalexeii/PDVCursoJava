@@ -11,7 +11,6 @@ package mx.com.elektra.sistemas.busmgmt;
  */
 public class Compra {
     private int idCompra;
-    private Cliente cliente;
     private Ticket ticket;
     private String status;
    
@@ -25,15 +24,6 @@ public class Compra {
     public int getIdCompra() {
         return idCompra;
     }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public Ticket getTicket() {
         return ticket;
     }

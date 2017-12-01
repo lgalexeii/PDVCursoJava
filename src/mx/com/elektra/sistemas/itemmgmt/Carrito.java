@@ -8,6 +8,7 @@ package mx.com.elektra.sistemas.itemmgmt;
 import mx.com.elektra.sistemas.busmgmt.Tienda;
 import java.util.ArrayList;
 import java.util.List;
+import mx.com.elektra.sistemas.exceptions.ArticuloNoEncontradoException;
 
 /**
  *
@@ -21,9 +22,12 @@ public class Carrito {
     }
     
     public void agregarArticulo(String articulo, int cantidad){
-        
-        ArticuloCompra art = Tienda.obtenerArticulo(articulo,cantidad);
-        listaCompras.add(art);
+        try{
+            ArticuloCompra art = Tienda.obtenerArticulo(articulo,cantidad);
+            listaCompras.add(art);
+        }catch(ArticuloNoEncontradoException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -44,6 +48,7 @@ public class Carrito {
         
         if(cuantos >= remArticulo.getCantidad()){
             listaCompras.remove(remArticulo);
+            listaCompras.stream().filter(c->c!=null);
         }else{
             remArticulo.setCantidad(remArticulo.getCantidad() -  cuantos);
         }
@@ -52,8 +57,5 @@ public class Carrito {
 
     public List<ArticuloCompra> getListaCompras() {
         return listaCompras;
-    }
-    
-    
-    
+    }   
 }

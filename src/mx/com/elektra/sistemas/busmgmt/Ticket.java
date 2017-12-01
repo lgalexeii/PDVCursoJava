@@ -7,13 +7,14 @@ package mx.com.elektra.sistemas.busmgmt;
 
 import java.util.ArrayList;
 import java.util.List;
+import mx.com.elektra.sistemas.busint.Printable;
 import mx.com.elektra.sistemas.itemmgmt.ArticuloCompra;
 
 /**
  *
  * @author 171127 Grupo Salinas
  */
-public class Ticket {
+public class Ticket implements Printable {
     private List<ArticuloCompra> listaComprados;
     private double total;
     private double impuestos;
@@ -42,7 +43,8 @@ public class Ticket {
         this.impuestos = impuestos;
     }
     
-    public void imprimirTicket(){
+    @Override
+    public void imprimir(){
         System.out.println("Desc\tP. Unit\tCant\tTotal\tDesc\tPrecio Final");
         for(ArticuloCompra art:this.listaComprados){
             int cantidad = art.getCantidad();

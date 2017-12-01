@@ -39,5 +39,9 @@ public class GestorConsola {
         Character r = teclado.next().charAt(0);
         return r.equals('s');
     }
-    
+     public static String readStringLine(String msg) {
+         Scanner teclado = new Scanner(System.in);
+        System.out.print(msg);
+        return teclado.nextLine();
+    }
 }
